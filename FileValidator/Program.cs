@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using System.Drawing.Text;
+
 namespace FileValidator
 {
     internal static class Program

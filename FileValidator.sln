@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileValidator", "FileValidator\FileValidator.csproj", "{AAD315D9-0580-404F-8764-E30C5784E349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileValidator", "FileValidator\FileValidator.csproj", "{AAD315D9-0580-404F-8764-E30C5784E349}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAB754DF-D3A3-4E01-B12B-24FB3C88E753}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,8 +13,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AAD315D9-0580-404F-8764-E30C5784E349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAD315D9-0580-404F-8764-E30C5784E349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD315D9-0580-404F-8764-E30C5784E349}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD315D9-0580-404F-8764-E30C5784E349}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{AAD315D9-0580-404F-8764-E30C5784E349}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAD315D9-0580-404F-8764-E30C5784E349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
