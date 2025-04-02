@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FileValidator
 {
-    internal class Rule(string name, string regex, string comment)
+    internal class Rule(string regex, string comment)
     {
-        public string Name = name;
         public string Regex = regex;
         public string Comment = comment;
     }
