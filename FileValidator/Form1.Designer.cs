@@ -32,6 +32,7 @@
             btnExit = new Button();
             txtTranslation = new TextBox();
             linkLabel1 = new LinkLabel();
+            btnClear = new Button();
             SuspendLayout();
             // 
             // btnValidate
@@ -46,7 +47,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(138, 349);
+            btnExit.Location = new Point(244, 349);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(94, 29);
             btnExit.TabIndex = 1;
@@ -59,6 +60,7 @@
             txtTranslation.Location = new Point(12, 12);
             txtTranslation.Multiline = true;
             txtTranslation.Name = "txtTranslation";
+            txtTranslation.ScrollBars = ScrollBars.Both;
             txtTranslation.Size = new Size(794, 331);
             txtTranslation.TabIndex = 2;
             // 
@@ -73,6 +75,16 @@
             linkLabel1.Text = "Suggest a rule";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(128, 349);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(94, 29);
+            btnClear.TabIndex = 4;
+            btnClear.Text = "&Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
+            // 
             // frmValidator
             // 
             AllowDrop = true;
@@ -80,6 +92,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(818, 390);
+            Controls.Add(btnClear);
             Controls.Add(linkLabel1);
             Controls.Add(txtTranslation);
             Controls.Add(btnExit);
@@ -99,5 +112,6 @@
         private Button btnExit;
         private TextBox txtTranslation;
         private LinkLabel linkLabel1;
+        private Button btnClear;
     }
 }

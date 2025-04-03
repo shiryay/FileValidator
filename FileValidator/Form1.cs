@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 
 namespace FileValidator
 {
@@ -7,6 +8,8 @@ namespace FileValidator
     {
         private List<Rule> rules;
         private string rulesFile = "rules.cfg";
+        private string validatedText;
+        private string reportText;
 
         public frmValidator()
         {
@@ -28,7 +31,7 @@ namespace FileValidator
                     rules.Add(new Rule(tempString));
                 }
                 while (sr.EndOfStream != true);
-                MessageBox.Show(rules.Count + " rules loaded successfully");
+                //MessageBox.Show(rules.Count + " rules loaded successfully");
             }
             else
             {
@@ -51,11 +54,14 @@ namespace FileValidator
 
         private void btnValidate_Click(object sender, EventArgs e)
         {
-            String targetText = "";
+            String targetText;
 
-            if (txtTranslation.Text.Trim().Length > 0) {
-                targetText = txtTranslation.Text;
-                MessageBox.Show(targetText);
+            if (txtTranslation.Text.Trim().Length > 0)
+            {
+                validatedText = txtTranslation.Text;
+                txtTranslation.Clear();
+                CheckText();
+                txtTranslation.Text = reportText;
             }
             else
             {
@@ -64,10 +70,49 @@ namespace FileValidator
             }
         }
 
-        private void ValidateFile(string fileName)
+        private void CheckText()
         {
-            MessageBox.Show($"{fileName} has been successfully validated");
-        }
+            List<String> reportList = new List<String>();
+            reportText = "";
 
+           // Checking rules
+            foreach (Rule rule in rules)
+            {
+                MatchCollection matches = Regex.Matches(validatedText, rule.Regex);
+                if (matches.Count > 0)
+                {
+                    reportList.Add($"Found {matches.Count} instances:\r\n");
+                    reportList.Add(rule.Comment + Environment.NewLine);
+                    reportList.Add("------------------------\r\n");
+                    foreach (Match m in matches)
+                    {
+                        reportList.Add($"\t{m.Value}\r\n");
+                    }
+                    reportList.Add(Environment.NewLine);
+                }
+            }
+
+            if (!validatedText.Trim().EndsWith("-end of document-"))
+            {
+                reportList.Add("No end tag found!\r\n");
+            }
+
+            if (reportList.Count > 0)
+            {
+                reportText = "Validation report:" + Environment.NewLine + Environment.NewLine;
+                foreach (String s in reportList)
+                {
+                    reportText += s;
+                }
+            }
+            else
+            {
+                reportText = "No issues found";
+            }
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtTranslation.Clear();
+        }
     }
 }
