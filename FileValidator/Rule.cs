@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace FileValidator
 {
-    internal class Rule(string regex, string comment)
+    internal class Rule
     {
-        public string Regex = regex;
-        public string Comment = comment;
-    }
+        public string Regex { get; set; }
+        public string Comment { get; set; }
 
-    // TODO: change constructor to parse a comma-separated string
+        // Constructor parsing a comma-separated string
+        public Rule(string ruleString)
+        {
+            var ruleComponents = ruleString.Split(',');
+            if (ruleComponents.Length >= 2)
+            {
+                Regex = ruleComponents[0];
+                Comment = ruleComponents[1];
+            }
+        }
+    }
 }

@@ -5,49 +5,36 @@ namespace FileValidator
 {
     public partial class frmValidator : Form
     {
+        private List<Rule> rules;
+        private string rulesFile = "rules.cfg";
+
         public frmValidator()
         {
             InitializeComponent();
+            rules = new List<Rule>();
+            LoadRules();
         }
 
-        private void ValidateFile(string fileName)
+        private void LoadRules()
         {
-            MessageBox.Show($"{fileName} has been successfully validated");
-        }
-
-        private List<Rule> LoadRules(string path)
-        {
-            List<Rule> ruleList = new();
             string tempString;
 
-            if (File.Exists(path))
+            if (File.Exists(rulesFile))
             {
-                StreamReader sr = new StreamReader(path);
+                StreamReader sr = new StreamReader(rulesFile);
                 do
                 {
-                    tempString = sr.ReadLine();
-                    ruleList.Add(ParseForRules(tempString));
+                    tempString = sr.ReadLine().TrimEnd();
+                    rules.Add(new Rule(tempString));
                 }
                 while (sr.EndOfStream != true);
-                return ruleList;
+                MessageBox.Show(rules.Count + " rules loaded successfully");
             }
             else
-                return new List<Rule>();
-        }
-
-        private string GetPath()
-        {
-            string exePath = Application.ExecutablePath;
-            int lastSlashIndex = exePath.LastIndexOf(@"\");
-            string folderPath = exePath.Substring(0, lastSlashIndex + 1);
-            return folderPath;
-        }
-
-        private Rule ParseForRules(string ruleString)
-        {
-            string[] ruleComponents = new string[3];
-            ruleComponents = ruleString.Split(',');
-            return new Rule(ruleComponents[0], ruleComponents[1]);
+            {
+                MessageBox.Show("Rules file not found");
+                return;
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -65,11 +52,6 @@ namespace FileValidator
         private void btnValidate_Click(object sender, EventArgs e)
         {
             String targetText = "";
-            List<Rule> rules;
-            string ruleFilePath = GetPath() + "rules.cfg";
-
-            rules = LoadRules(ruleFilePath);
-            MessageBox.Show(rules.Count.ToString());
 
             if (txtTranslation.Text.Trim().Length > 0) {
                 targetText = txtTranslation.Text;
@@ -81,5 +63,11 @@ namespace FileValidator
                 return;
             }
         }
+
+        private void ValidateFile(string fileName)
+        {
+            MessageBox.Show($"{fileName} has been successfully validated");
+        }
+
     }
 }
