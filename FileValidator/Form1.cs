@@ -77,7 +77,7 @@ namespace FileValidator
             // Checking rules
             foreach (Rule rule in rules)
             {
-                MatchCollection matches = Regex.Matches(validatedText, rule.Regex);
+                MatchCollection matches = Regex.Matches(validatedText, rule.Regex, RegexOptions.IgnoreCase);
                 if (matches.Count > 0)
                 {
                     reportList.Add($"Found {matches.Count} instances:\r\n");
