@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using System.Drawing.Text;
 using System.Text.RegularExpressions;
 
 namespace FileValidator
@@ -8,6 +6,7 @@ namespace FileValidator
     {
         private List<Rule> rules;
         private string rulesFile = "rules.cfg";
+        private string rulesUrl = "https://github.com/shiryay/rulesrepo/raw/refs/heads/main/c%23/rules.cfg";
         private string validatedText;
         private string reportText;
 
@@ -31,7 +30,7 @@ namespace FileValidator
                     rules.Add(new Rule(tempString));
                 }
                 while (sr.EndOfStream != true);
-                //MessageBox.Show(rules.Count + " rules loaded successfully");
+                sr.Close();
             }
             else
             {
@@ -75,7 +74,7 @@ namespace FileValidator
             List<String> reportList = new List<String>();
             reportText = "";
 
-           // Checking rules
+            // Checking rules
             foreach (Rule rule in rules)
             {
                 MatchCollection matches = Regex.Matches(validatedText, rule.Regex);
@@ -113,6 +112,26 @@ namespace FileValidator
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtTranslation.Clear();
+        }
+
+        private async void btnUpdateRules_Click(object sender, EventArgs e)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.GetAsync(rulesUrl);
+                    response.EnsureSuccessStatusCode();
+                    var rulesContent = await response.Content.ReadAsStringAsync();
+                    await File.WriteAllTextAsync(rulesFile, rulesContent);
+                    MessageBox.Show("Rules updated successfully");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error downloading rules file: " + ex.Message);
+                    return;
+                }
+            }
         }
     }
 }

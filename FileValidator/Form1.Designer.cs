@@ -33,6 +33,7 @@
             txtTranslation = new TextBox();
             linkLabel1 = new LinkLabel();
             btnClear = new Button();
+            btnUpdateRules = new Button();
             SuspendLayout();
             // 
             // btnValidate
@@ -47,7 +48,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(244, 349);
+            btnExit.Location = new Point(381, 349);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(94, 29);
             btnExit.TabIndex = 1;
@@ -85,6 +86,16 @@
             btnClear.UseVisualStyleBackColor = true;
             btnClear.Click += btnClear_Click;
             // 
+            // btnUpdateRules
+            // 
+            btnUpdateRules.Location = new Point(244, 349);
+            btnUpdateRules.Name = "btnUpdateRules";
+            btnUpdateRules.Size = new Size(115, 29);
+            btnUpdateRules.TabIndex = 5;
+            btnUpdateRules.Text = "&Update Rules";
+            btnUpdateRules.UseVisualStyleBackColor = true;
+            btnUpdateRules.Click += btnUpdateRules_Click;
+            // 
             // frmValidator
             // 
             AllowDrop = true;
@@ -92,6 +103,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(818, 390);
+            Controls.Add(btnUpdateRules);
             Controls.Add(btnClear);
             Controls.Add(linkLabel1);
             Controls.Add(txtTranslation);
@@ -113,5 +125,6 @@
         private TextBox txtTranslation;
         private LinkLabel linkLabel1;
         private Button btnClear;
+        private Button btnUpdateRules;
     }
 }
