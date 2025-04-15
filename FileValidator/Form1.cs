@@ -6,7 +6,7 @@ namespace FileValidator
     {
         private List<Rule> rules;
         private string rulesFile = "rules.cfg";
-        private string rulesUrl = "https://github.com/shiryay/rulesrepo/raw/refs/heads/main/rules.cfg";
+        private string rulesUrl = "https://github.com/shiryay/FileValidator/raw/refs/heads/master/FileValidator/rules.cfg";
         private string validatedText;
         private string reportText;
 
