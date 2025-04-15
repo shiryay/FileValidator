@@ -124,6 +124,8 @@ namespace FileValidator
                     response.EnsureSuccessStatusCode();
                     var rulesContent = await response.Content.ReadAsStringAsync();
                     await File.WriteAllTextAsync(rulesFile, rulesContent);
+                    rules.Clear();
+                    LoadRules();
                     MessageBox.Show("Rules updated successfully");
                 }
                 catch (Exception ex)
@@ -131,6 +133,18 @@ namespace FileValidator
                     MessageBox.Show("Error downloading rules file: " + ex.Message);
                     return;
                 }
+            }
+        }
+
+        private void btnViewRules_Click(object sender, EventArgs e)
+        {
+            txtTranslation.Clear();
+            txtTranslation.AppendText("Current rule:" + Environment.NewLine);
+
+            foreach (Rule rule in rules)
+            {
+                txtTranslation.AppendText($"{rule.Regex}\t{rule.Comment}");
+                txtTranslation.AppendText(Environment.NewLine);
             }
         }
     }
